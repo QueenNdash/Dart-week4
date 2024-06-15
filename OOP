@@ -1,0 +1,50 @@
+# Define a base class with inheritance
+class Animal:
+    def __init__(self, name):
+        self.name = name
+    
+    def speak(self):
+        raise NotImplementedError("Subclass must implement abstract method")
+
+# Subclass that overrides the speak method
+class Dog(Animal):
+    def speak(self):
+        return f"{self.name} says Woof!"
+
+# Class that initializes data from a file
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+    
+    def __str__(self):
+        return f"Name: {self.name}, Age: {self.age}"
+
+# Function to read data from a file and initialize Person objects
+def read_persons_from_file(filename):
+    persons = []
+    with open(filename, 'r') as file:
+        for line in file:
+            data = line.strip().split(',')
+            name = data[0].strip()
+            age = int(data[1].strip())
+            person = Person(name, age)
+            persons.append(person)
+    return persons
+
+# Method demonstrating the use of a loop
+def print_persons(persons):
+    for person in persons:
+        print(person)
+
+# Creating instances and demonstrating features
+if __name__ == "__main__":
+    # Create Dog instance
+    dog = Dog("Buddy")
+    print(dog.speak())  # Output: Buddy says Woof!
+    
+    # Initialize Person instances from file
+    persons = read_persons_from_file('persons.txt')
+    
+    # Print initialized persons
+    print_persons(persons)
